@@ -1,0 +1,16 @@
+def minima(a,i):
+  leaf=len(a)-1
+  minimum=i
+  left=2*i+1
+  right=2*i+2
+  if left<=leaf and a[i]>a[left]: 
+    minimum=leaf
+  if right<=leaf and a[minimum]>a[right]:   
+    minimum=right
+  if minimum==i:     #local minima               
+    return a[i]
+  else:
+    return minima(a,minimum)   #search the subtree which leads towards local minima
+if __name__=="__main__":
+  a=[4,6,3,5,2,7,2]
+  print minima(a,0)

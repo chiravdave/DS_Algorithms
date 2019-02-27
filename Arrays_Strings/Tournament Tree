@@ -1,0 +1,22 @@
+def divide_conquer(b=[]):
+  if len(b)==1:
+     return b[0]
+  else:
+     c=[]
+     i=0
+     while i<len(b)-1:
+       if b[i]>b[i+1]:
+          c.append(b[i])
+          a[b[i]].append(b[i+1])  #storing loser's list of the player b[i]
+       else:
+          c.append(b[i+1])
+          a[b[i+1]].append(b[i])  #storing loser's list of the player b[i+1]
+       i+=2
+     return divide_conquer(c)
+if __name__ == "__main__": 
+   a={5:[],4:[],12:[],34:[]}
+   b=divide_conquer([5,4,12,34])
+   print divide_conquer(a[b])   #searching loser's list of the winner
+    
+    """Python Code for finding second runner up(=second highest no of the array) in a tournament of n players in (n+logn-2) 
+    comparisons using divide-conquer technique."""

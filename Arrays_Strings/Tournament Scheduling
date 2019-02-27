@@ -1,0 +1,18 @@
+a=[1,2,3,4,5]  #players in the tournament
+n=len(a)
+if n%2==0:    #Even no. of players
+  for i in range(n-1):
+    print "Day ",i+1,":"
+    for j in range(n/2):
+      print "\t","Match between:",a[j],"and",a[n-j-1]
+    a=[a[0]]+a[2:]+[a[1]]
+else:                      #Odd no. of players
+  for i in range(n):
+    print "Day ",i+1,":"
+    for j in range(n/2):
+      print "\t","Match between:",a[j],"and",a[n-j-1]
+    print "\t","No match for",a[n/2]
+    a=a[1:]+[a[0]]
+    
+"""python code for scheduling matches in a tournament. When total players is even then fixed the first player and rotate other 
+players and for odd keep the middle player fixed and rotate others"""
