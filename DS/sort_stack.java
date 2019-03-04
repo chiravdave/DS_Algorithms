@@ -1,8 +1,12 @@
+//Implemented stack with sorting capability; sorting no.s in ascending order from top to bottom
+
 import java.util.Scanner;
 
 class Stack{
+
     int storage[];
     int top;
+
     Stack(int size){
         storage = new int[size];
         top = -1;
@@ -26,6 +30,7 @@ class Stack{
             return storage[top--];
         }
     }
+
     //Printing the numbers present in the stack
     void showNos(){
         if(top == -1){
@@ -65,7 +70,8 @@ class Stack{
     }
 }
 
-public class HelloWorld{
+class Main{
+
      public static void main(String []args){
         Scanner s = new Scanner(System.in);
         int ch, val;

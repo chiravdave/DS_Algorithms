@@ -1,11 +1,16 @@
 //Program to find highest increasing subsequence in a given array
-public class HIS {
-	private static int a[];
+
+class HIS {
+
+	private int a[];
+
 	public static void main(String[] args) {
-		a=new int[]{8,3,9,4,10};
-		calculate();
+		HIS ob = new HIS();
+                ob.a=new int[]{8,3,9,4,10};
+		ob.calculate();
 	}
-	private static void calculate()
+
+	private void calculate()
 	{
 		int n=a.length;
 		int max=1;
@@ -35,7 +40,8 @@ public class HIS {
 			}
 		}
 	}
-	private static void printSequence(int p[],int h){
+
+	private void printSequence(int p[],int h){
 		if(p[h]==h)
 			System.out.print(a[h]);
 		else{

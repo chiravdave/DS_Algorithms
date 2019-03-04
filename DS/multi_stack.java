@@ -1,11 +1,15 @@
+//Program implementing multiple stacks using a single 1D array
+
 import java.util.Scanner;
 
 class MultiStack{
+
     int storage[];
     int tops[];
     int n_stacks;
+
     MultiStack(int n){
-        storage = new int[n*3];
+        storage = new int[n*10]; //Max capacity for each stack is 10 elements
         tops = new int[n];
         n_stacks = n;
         /*Stack locations are arranged in consecutive order.i.e for n=3, indexes 0,3,6... for stack-1; 1,4,7.. for stack-2;
@@ -27,7 +31,7 @@ class MultiStack{
     }
     
     int pop(int which_one){
-        if(tops[which_one-1] < (which_one-1)){
+        if(tops[which_one-1] < 0){
             return -1;
         }
         else{
@@ -36,9 +40,10 @@ class MultiStack{
             return val;
         }
     }
+
     //Print numbers present in the particular stack
     void showNos(int which_one){
-        if(tops[which_one-1] < which_one){
+        if(tops[which_one-1] < 0){
             System.out.println("Stack no."+which_one+" is empty");
         }
         else{
@@ -50,7 +55,8 @@ class MultiStack{
     }
 }
 
-public class HelloWorld{
+class Main{
+
      public static void main(String []args){
         Scanner s = new Scanner(System.in);
         int ch, stack, val;

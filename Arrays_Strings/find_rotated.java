@@ -1,9 +1,13 @@
 //Find a no in a rotated array
-public class Rotated{
+
+class Rotated{
+
+     int a[];
 
      public static void main(String []args){
-        int a[] = new int[]{2,3,4,5,1};
-        int index = search(a, 3);
+        Rotated ob = new Rotated();
+        ob.a = new int[]{2,3,4,5,1};
+        int index = ob.search(3);
         if(index != -1){
             System.out.println("No found at index "+index);
         }
@@ -12,7 +16,7 @@ public class Rotated{
         }
      }
      
-     static int search(int a[], int check){
+     int search(int check){
          int low=0, high = a.length-1, middle=0;
          while(low<=high){
              middle = (low+high)/2;

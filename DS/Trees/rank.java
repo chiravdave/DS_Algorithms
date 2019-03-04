@@ -13,8 +13,10 @@
 import java.util.Scanner;
 
 class Node{
+
     int val, counter;
     Node left, right;
+
     Node(int val, int counter){
         this.val = val;
         this.counter = counter;
@@ -24,6 +26,7 @@ class Node{
 }
 
 class BST{
+
     Node root;
     
     void track(int val){

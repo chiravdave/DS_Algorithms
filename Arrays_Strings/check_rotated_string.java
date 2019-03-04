@@ -1,9 +1,10 @@
 // Check if the second string is a roation of the first string
+
 import java.util.Scanner;
-public class HelloWorld{
+
+class CheckRotation{
 
      public static void main(String []args){
-        System.out.println("Hello World");
         Scanner s = new Scanner(System.in);
         System.out.println("Enter 2 strings to check");
         String s1 = s.nextLine();
