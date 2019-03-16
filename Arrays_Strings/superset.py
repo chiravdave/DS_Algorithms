@@ -16,8 +16,10 @@ class SuperSet:
 		if index == len(self.a):
 			print(cur_subset)
 		else:
+			#Include the current character
 			cur_subset.append(self.a[index])
 			self.print_recursively(cur_subset, index+1)
+			#Remove the current character
 			cur_subset.pop()
 			self.print_recursively(cur_subset, index+1)
 
