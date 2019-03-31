@@ -10,7 +10,6 @@ class Triplets:
 		self.a = a
 
 	def find_all_triplets(self, s):
-		self.remove_duplicates()
 		#Sort the array
 		self.a.sort()
 		pairs = []
