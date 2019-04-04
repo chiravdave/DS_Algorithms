@@ -10,24 +10,22 @@ class Triplets:
 		self.a = a
 
 	def find_all_triplets(self, s):
-		self.remove_duplicates()
 		#Sort the array
 		self.a.sort()
-		pairs = []
+		pairs = set()
 		l = len(self.a)
 		#Fix each element at a time and then perform 2Sum approach with sum as s-fixed element
 		for start in range(l-2):
 			new_s = s - self.a[start]
-			if new_s <= 0:
-				break
 			mid = start+1
 			end = l-1
 			#Logic of 2Sum
 			while mid < end:
 				add = self.a[mid] + self.a[end] 
 				if add == new_s:
-					pairs.append((self.a[start], self.a[mid], self.a[end]))
-					break
+					pairs.add((self.a[start], self.a[mid], self.a[end]))
+					end -= 1
+					mid += 1
 				elif add > new_s:
 					end -= 1
 				else:
@@ -35,7 +33,6 @@ class Triplets:
 		print(pairs)
 
 	def find_closest_triplet(self, s):
-		self.remove_duplicates()
 		closest_sum = 999999
 		pair = None
 		l = len(self.a)
@@ -61,16 +58,8 @@ class Triplets:
 					end -= 1
 		print(pair)
 
-	def remove_duplicates(self):
-		unique_elements = set()
-		for ele in self.a:
-			unique_elements.add(ele)
-		self.a = []
-		for ele in unique_elements:
-			self.a.append(ele)
-
 if __name__ == '__main__':
-	ob = Triplets([0, -1, 2, -3, 1])
+	ob = Triplets([0, 0, 0])
 	print('All possible triplets that sum to {} are as follows:'.format(0))
 	ob.find_all_triplets(0)
 	print('The closest triplet to {} is:'.format(0))
