@@ -96,7 +96,7 @@ class BST:
 		if(temp == None):
 			return 1
 		else:
-			if((minimum != None and temp.val <= minimum) == True or (maximum != None and temp.val > maximum) == True):
+			if((minimum != None and temp.val <= minimum) or (maximum != None and temp.val > maximum)):
 				return -1
 			if (self.check_helper(temp.left, minimum, temp.val) == -1 or self.check_helper(temp.right, temp.val, maximum) == -1):
 				return -1
