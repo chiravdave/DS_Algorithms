@@ -25,11 +25,11 @@ This project contains a script that will perform transpose and multiplication of
 # Project structure
 	.
     ├── test_cases              	# Test Cases folder
-    │   ├── case1					# Test case 1
+    │   ├── case1			# Test case 1
     │	│	├── input.txt       	# Input file
     │	│	│── output          	# Output folder
-    │	│		│──	output.txt  	# Output file
-    │   └── ....					# More test cases
+    │	│		│── output.txt  # Output file
+    │   └── ....			# More test cases
     ├── src                     	# Source files
     │	├── matrix_ops.cpp      	# File containing main code 
     └── README.md
