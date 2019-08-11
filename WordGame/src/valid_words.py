@@ -34,9 +34,9 @@ class Trie:
         with open(dict_file_loc, "r") as dict_file:
             for word in dict_file:
                 # Converting into uppercase so that we can have one fixed case matching
-                self.__add_word(word.strip().upper())
+                self._add_word(word.strip().upper())
 
-    def __add_word(self, word: str) -> None:
+    def _add_word(self, word: str) -> None:
         """
         This private method will add the given word to the prefix tree.
 
@@ -71,7 +71,7 @@ class Board:
     def __init__(self):
         self.board = []
 
-    def preprocess_row(self, row: List[str]) -> None:
+    def _preprocess_row(self, row: List[str]) -> None:
         """
         This method will convert each character in the row into uppercase so that matching can be case independent and
         we will prevent considering similar words multiple times that differ only in case.
@@ -96,13 +96,13 @@ class Board:
             # Will create one row at a time
             for line in board_file:
                 row = line.strip().split(",")
-                self.preprocess_row(row)
+                self._preprocess_row(row)
                 self.board.append(row)
 
         # Storing the location of the parent directory so that we can save the output file inside it
         self.data_dir = board_file_loc[: board_file_loc.rfind("/")]
 
-    def write_result(self, words_found: Set[str]) -> None:
+    def _write_result(self, words_found: Set[str]) -> None:
         """
         This method will write out all valid words to an output.txt file inside the same directory where the input files
         are.
@@ -116,7 +116,7 @@ class Board:
                 output_file.write(word)
                 output_file.write("\n")
 
-    def __find_valid_words(
+    def _find_valid_words(
         self,
         cur_node,
         row: int,
@@ -145,161 +145,24 @@ class Board:
             if len(word) >= 3:
                 words_found.add(word)
 
-        # Checking if the top left character can be considered
-        if (
-            row - 1 >= 0
-            and col - 1 >= 0
-            and (row - 1, col - 1) not in visited
-            and self.board[row - 1][col - 1] in cur_node.children
-        ):
-            visited.add((row - 1, col - 1))
-            cur_word.append(self.board[row - 1][col - 1])
-            self.__find_valid_words(
-                cur_node.children[self.board[row - 1][col - 1]],
-                row - 1,
-                col - 1,
-                cur_word,
-                visited,
-                words_found,
-            )
-            visited.remove((row - 1, col - 1))
-            cur_word.pop()
-
-        # Checking if the top character can be considered
-        if (
-            row - 1 >= 0
-            and (row - 1, col) not in visited
-            and self.board[row - 1][col] in cur_node.children
-        ):
-            visited.add((row - 1, col))
-            cur_word.append(self.board[row - 1][col])
-            self.__find_valid_words(
-                cur_node.children[self.board[row - 1][col]],
-                row - 1,
-                col,
-                cur_word,
-                visited,
-                words_found,
-            )
-            visited.remove((row - 1, col))
-            cur_word.pop()
-
-        # Checking if the top right character can be considered
-        if (
-            row - 1 >= 0
-            and col + 1 < cols
-            and (row - 1, col + 1) not in visited
-            and self.board[row - 1][col + 1] in cur_node.children
-        ):
-            visited.add((row - 1, col + 1))
-            cur_word.append(self.board[row - 1][col + 1])
-            self.__find_valid_words(
-                cur_node.children[self.board[row - 1][col + 1]],
-                row - 1,
-                col + 1,
-                cur_word,
-                visited,
-                words_found,
-            )
-            visited.remove((row - 1, col + 1))
-            cur_word.pop()
-
-        # Checking if the left character can be considered
-        if (
-            col - 1 >= 0
-            and (row, col - 1) not in visited
-            and self.board[row][col - 1] in cur_node.children
-        ):
-            visited.add((row, col - 1))
-            cur_word.append(self.board[row][col - 1])
-            self.__find_valid_words(
-                cur_node.children[self.board[row][col - 1]],
-                row,
-                col - 1,
-                cur_word,
-                visited,
-                words_found,
-            )
-            visited.remove((row, col - 1))
-            cur_word.pop()
-
-        # Checking if the right character can be considered
-        if (
-            col + 1 < cols
-            and (row, col + 1) not in visited
-            and self.board[row][col + 1] in cur_node.children
-        ):
-            visited.add((row, col + 1))
-            cur_word.append(self.board[row][col + 1])
-            self.__find_valid_words(
-                cur_node.children[self.board[row][col + 1]],
-                row,
-                col + 1,
-                cur_word,
-                visited,
-                words_found,
-            )
-            visited.remove((row, col + 1))
-            cur_word.pop()
-
-        # Checking if the bottom left character can be considered
-        if (
-            row + 1 < rows
-            and col - 1 >= 0
-            and (row + 1, col - 1) not in visited
-            and self.board[row + 1][col - 1] in cur_node.children
-        ):
-            visited.add((row + 1, col - 1))
-            cur_word.append(self.board[row + 1][col - 1])
-            self.__find_valid_words(
-                cur_node.children[self.board[row + 1][col - 1]],
-                row + 1,
-                col - 1,
-                cur_word,
-                visited,
-                words_found,
-            )
-            visited.remove((row + 1, col - 1))
-            cur_word.pop()
-
-        # Checking if the bottom character can be considered
-        if (
-            row + 1 < rows
-            and (row + 1, col) not in visited
-            and self.board[row + 1][col] in cur_node.children
-        ):
-            visited.add((row + 1, col))
-            cur_word.append(self.board[row + 1][col])
-            self.__find_valid_words(
-                cur_node.children[self.board[row + 1][col]],
-                row + 1,
-                col,
-                cur_word,
-                visited,
-                words_found,
-            )
-            visited.remove((row + 1, col))
-            cur_word.pop()
-
-        # Checking if the bottom right character can be considered
-        if (
-            row + 1 < rows
-            and col + 1 < cols
-            and (row + 1, col + 1) not in visited
-            and self.board[row + 1][col + 1] in cur_node.children
-        ):
-            visited.add((row + 1, col + 1))
-            cur_word.append(self.board[row + 1][col + 1])
-            self.__find_valid_words(
-                cur_node.children[self.board[row + 1][col + 1]],
-                row + 1,
-                col + 1,
-                cur_word,
-                visited,
-                words_found,
-            )
-            visited.remove((row + 1, col + 1))
-            cur_word.pop()
+        # Will check characters from all the adjacent cells to form a valid word
+        for next_row in range(row-1, row+2):
+            for next_col in range(col-1, col+2):
+                # Checking if the adjacent cell is valid and can be considered as a part of a valid word
+                if next_row in range(0, rows) and next_col in range(0, cols) \
+                and (next_row, next_col) not in visited and self.board[next_row][next_col] in cur_node.children:
+                    visited.add((next_row, next_col))
+                    cur_word.append(self.board[next_row][next_col])
+                    self._find_valid_words(
+                            cur_node.children[self.board[next_row][next_col]],
+                            next_row,
+                            next_col,
+                            cur_word,
+                            visited,
+                            words_found
+                        )
+                    visited.remove((next_row, next_col))
+                    cur_word.pop()
 
     def get_valid_words(self, root) -> None:
         """
@@ -321,7 +184,7 @@ class Board:
                 if self.board[row][col] in root.children:
                     visited.add((row, col))
                     cur_word.append(self.board[row][col])
-                    self.__find_valid_words(
+                    self._find_valid_words(
                         root.children[self.board[row][col]],
                         row,
                         col,
@@ -332,7 +195,7 @@ class Board:
                     visited.remove((row, col))
                     cur_word.pop()
 
-        self.write_result(words_found)
+        self._write_result(words_found)
 
 
 if __name__ == "__main__":
