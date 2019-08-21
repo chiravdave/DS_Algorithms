@@ -18,7 +18,7 @@ class BST:
 	def helper_first_common_ancester(self, cur_node, val_1, val_2):
 		if not cur_node:
 			return None
-		#Ancester's value will be in between the two nodes
+		# Ancester's value will be in between the two nodes
 		elif cur_node.val == val_1 or cur_node.val == val_2:
 			return cur_node.val
 		else:
@@ -42,7 +42,7 @@ def main():
 	root.right.left = Node(20)
 	root.right.left.right = Node(100)
 	tree = BST(root)
-	print('The first common ancestor of {} and {} is: {}'.format(11, 2, tree.get_first_common_ancester(11, 2)))
+	print('The first common ancestor of {} and {} is: {}'.format(11, 5, tree.get_first_common_ancester(11, 2)))
 
 if __name__ == "__main__":
 	main()

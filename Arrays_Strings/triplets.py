@@ -1,7 +1,7 @@
 ''' 
 Given an array of elements. 
 1) The task is to find all unique triplets whose sum is equal to a given no.
-2) The task is to find a triplets whose sum is closest to a given no
+2) The task is to find a triplet whose sum is closest to a given no
 '''
 
 class Triplets:
@@ -35,6 +35,8 @@ class Triplets:
 	def find_closest_triplet(self, s):
 		closest_sum = 999999
 		pair = None
+		#Sort the array
+		self.a.sort()
 		l = len(self.a)
 		for start in range(l-2):
 			#Saving time

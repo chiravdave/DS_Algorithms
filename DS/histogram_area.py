@@ -36,8 +36,7 @@ class HistogramArea:
 	def remove_larger_bars(self, stack, max_area, cur_index):
 		last_index = cur_index - 1
 		while True:
-			l = len(stack)
-			if l == 0 or stack[l-1][1] <= self.heights[cur_index]:
+			if l == 0 or stack[-1][1] <= self.heights[cur_index]:
 				break
 			else:
 				last_index, value = stack.pop()
