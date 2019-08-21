@@ -53,7 +53,7 @@ class UnivalTrees:
 				# Checking if the current tree (including the root) is universal or not
 				if cur_node.left and cur_node.left.val != cur_node.val or \
 					cur_node.right and cur_node.right.val != cur_node.val:
-					return n_left_unival_trees+n_right_unival_trees, True
+					return n_left_unival_trees+n_right_unival_trees, False
 
 				else:
 					return n_left_unival_trees+n_right_unival_trees+1, True
