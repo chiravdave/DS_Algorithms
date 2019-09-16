@@ -7,7 +7,7 @@ Output: 'abc', 'acb', 'bac', 'bca', 'cba', 'cab'
 class Permutations:
 
 	def __init__(self, s):
-		#Converting into a list because string is immutable
+		# Converting into a list because string is immutable
 		self.a = [ch for ch in s]
 
 	def print_string(self):
@@ -22,10 +22,10 @@ class Permutations:
 			self.print_string()
 		else:
 			for i in range(index, l):
-				#Swap current indexed element with rest of the elements coming after this index
+				# Swapping current indexed element with rest of the elements coming after this index
 				self.a[index], self.a[i] = self.a[i], self.a[index]
 				self.print_permutations_helper(index+1)
-				#Backtrack to previous state in the recursion tree
+				# Backtrack to previous state in the recursion tree
 				self.a[index], self.a[i] = self.a[i], self.a[index]
 
 if __name__ == '__main__':

@@ -4,47 +4,68 @@ each person must be both shorter and lighter than the person below him or her. G
 to compute the largest possible number of people in such a tower
 '''
 
+from typing import List, Tuple
+
 class Person:
 
-	def __init__(self, height, weight):
+	def __init__(self, height: int, weight: int):
 		self.height = height
 		self.weight = weight
 
+	def __lt__(self, other_person):
+		return self.height < other_person.height
+
+	def __str__(self):
+		return "Height & Weight are : {} and {}".format(self.height, self.weight)
+
 class CircusTower:
 
-	def __init__(self, people):
+	def __init__(self, people: List[Tuple[int, int]]):
 		self.people = people
 
-	def get_largest_no(self):
-		length = len(self.people)
-		#Sorting people with respect to their weight (primary parameter) and height (secondary parameter)
-		for i in range(length):
-			index = i
-			for j in range(i+1,length):
-				if(self.people[index].weight < self.people[j].weight) and (self.people[index].height < self.people[j].height):
-					index = j
-			if(i != index):
-				temp = self.people[i]
-				self.people[i] = self.people[j]
-				self.people[j] = temp
-		memo = {length-1:1} #Storing max length starting from the index of every individual person
-		largest = 1
-		for i in range(length-2,-1,-1):
-			max_length = 1
-			for j in range(i+1,length):
-				if((self.people[i].height > self.people[j].height) and (self.people[i].weight > self.people[j].weight) and (memo[j]+1 > max_length)):
-					max_length = memo[j] + 1
-			memo[i] = max_length
-			if(max_length > largest):
-				largest = max_length
-		return largest
+	def show_all(self) -> None:
+		"""
+		This method will display the list of people
+		"""
 
-if __name__ == '__main__':
+		for index, person in enumerate(self.people):
+			print("Property of person at index {} is: {}".format(index, person))
+
+	def get_largest_no(self) -> int:
+		"""
+		This method will return the largest possible number of people in this tower.
+
+		:param people: list of people with their height and weight
+		:rtype: largest possible number of people in this tower
+		"""
+
+		# Sorting people with respect to their height
+		self.people.sort()
+		#self.show_all()
+		# Now we just need to find the highest increasing subsequence respect to the weight values 
+		n_person = len(self.people)
+		# Will store the max lenght of increasing subsequence found till each index
+		largest_ss = [1] * n_person
+		final_subsequence = 1
+		for start in range(n_person):
+			for prev in range(start):
+				# Comparing height betwee two person
+				if self.people[prev].weight >= self.people[start].weight and (largest_ss[prev] + 1) > largest_ss[start]:
+					 largest_ss[start] = largest_ss[prev] + 1
+					 # Will calculate the highest increasing subsequence as well
+					 if final_subsequence < largest_ss[start]:
+					 	final_subsequence = largest_ss[start]
+
+		return final_subsequence
+
+
+if __name__ == "__main__":
 	n_person = int(input("Enter how many people"))
 	people = []
 	for i in range(n_person):
+		print("Enter details for person {}".format(i+1))
 		height = int(input("Enter height"))
 		weight = int(input("Enter weight"))
 		people.append(Person(height, weight))
 	circus = CircusTower(people)
-	print('Largest Possible No. is: {}'.format(circus.get_largest_no()))
+	print("Largest Possible No. is: {}".format(circus.get_largest_no()))

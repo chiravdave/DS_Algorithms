@@ -42,23 +42,37 @@ class UnivalTrees:
 		if not cur_node:
 			return 0, True
 
+		# Checking for leaf node
+		if not cur_node.left and not cur_node.right:
+			return 1, True
+
 		else:
 			# Getting no. of unival subtrees under the left subtree
-			n_left_unival_trees, is_unival_left_subtree = self._helper(cur_node.left)
+			left_n_unival_trees, is_left_subtree_unival = self._helper(cur_node.left)
 			# Getting no. of unival subtrees under the right subtree
-			n_right_unival_trees, is_unival_right_subtree = self._helper(cur_node.right)
+			right_n_unival_trees, is_right_subtree_unival = self._helper(cur_node.right)
 
-			# Checking if the subtrees are universal or not
-			if is_unival_left_subtree and is_unival_right_subtree:
+			cur_n_unival_tress, is_cur_tree_unival = left_n_unival_trees+right_n_unival_trees, True
+			
+			# Checking if the left subtree is universal or not
+			if is_left_subtree_unival:
 				# Checking if the current tree (including the root) is universal or not
-				if cur_node.left and cur_node.left.val != cur_node.val or \
-					cur_node.right and cur_node.right.val != cur_node.val:
-					return n_left_unival_trees+n_right_unival_trees, False
+				if cur_node.left and cur_node.left.val == cur_node.val:
+						cur_n_unival_tress += 1
+			# If left subtree is not unival then even currrent tree cannot be unival
+			else:
+				is_cur_tree_unival = False
 
-				else:
-					return n_left_unival_trees+n_right_unival_trees+1, True
+			# Checking if the right subtree is universal or not
+			if is_right_subtree_unival:
+				# Checking if the current tree (including the root) is universal or not
+				if cur_node.right and cur_node.right.val == cur_node.val:
+						cur_n_unival_tress += 1
+			# If right subtree is not unival then even currrent tree cannot be unival
+			else:
+				is_cur_tree_unival = False
 
-			return n_left_unival_trees+n_right_unival_trees, False
+			return cur_n_unival_tress, is_cur_tree_unival
 
 if __name__ == "__main__":
 	root = Node(5)

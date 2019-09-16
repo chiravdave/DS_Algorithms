@@ -18,7 +18,6 @@ class BST:
 	def helper_first_common_ancester(self, cur_node, val_1, val_2):
 		if not cur_node:
 			return None
-		# Ancester's value will be in between the two nodes
 		elif cur_node.val == val_1 or cur_node.val == val_2:
 			return cur_node.val
 		else:

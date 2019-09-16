@@ -56,9 +56,12 @@ class BST:
 				return None
 
 		elif cur_node.val > val:
-			return self._helper_inorder_successor(val, cur_node.left, successor)
+			return self._helper_inorder_successor(val, cur_node.left, cur_node)
 		else:
-			return self._helper_inorder_successor(val, cur_node.right, None)
+			if successor:
+				return self._helper_inorder_successor(val, cur_node.right, successor)
+			else:
+				return self._helper_inorder_successor(val, cur_node.right, None)
 
 	def get_inorder_successor(self, val: int) -> Optional[int]:
 		return self._helper_inorder_successor(val, self.root, None)
@@ -88,8 +91,8 @@ def main():
 	root.left.right.left = Node(10)
 	root.left.right.right = Node(14)
 	tree = BST(root)
-	print('The inorder successor of {} is: {}'.format(8, tree.get_inorder_successor(8)))
-	print('The first common ancestor of {} and {} is: {}'.format(4, 20, tree.get_first_common_ancester(4, 20)))
+	print('The inorder successor of {} is: {}'.format(14, tree.get_inorder_successor(14)))
+	print('The first common ancestor of {} and {} is: {}'.format(10, 22, tree.get_first_common_ancester(10, 22)))
 
 if __name__ == "__main__":
 	main()

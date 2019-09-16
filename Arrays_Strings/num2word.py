@@ -27,12 +27,12 @@ class Number2Words:
 		result.appendleft('')
 		while index >= 0:
 			if self.n[index] != '0':
-				#Position will tell us which place we are looking at (units, tens, hundred or thousand)
+				# Position will tell us which place we are looking at (units, tens, hundred or thousand)
 				position = l - (index + 1)
 				if position == 0:
 					result.appendleft(self.units[ord(self.n[index]) - 49])
 				elif position == 1:
-					#Check if this belongs to the special ten case
+					# Check if this belongs to the special ten case
 					if self.n[index] == '1' and self.n[index+1] != '0':
 						result.popleft()
 						result.appendleft(self.special_tens[ord(self.n[index+1]) - 49])

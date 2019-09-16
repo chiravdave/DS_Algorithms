@@ -13,7 +13,7 @@ class Decode:
 	def ways_to_decode(self, start_index):
 		if start_index == len(self.encrypt):
 			return 1
-		#No deconding possible if the first no. is a zero 
+		# No deconding possible if the first no. is a zero 
 		elif self.encrypt[start_index] == '0':
 			return 0
 		elif start_index in self.memo:

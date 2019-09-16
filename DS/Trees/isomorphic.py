@@ -15,7 +15,7 @@ def check_isomorphic(root_A, root_B) -> bool:
 	if root_A == root_B == None:
 		return True
 	# Check if one of the node is null and the other is not
-	elif (root_A == None and root_B != None) or (root_B == None and root_A != None):
+	elif not root_A or not root_B:
 		return False
 	# Check if the value at both the nodes are equal or not
 	elif root_A.val != root_B.val:
