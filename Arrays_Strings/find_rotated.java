@@ -24,7 +24,7 @@ class Rotated{
                  return middle;
              }
              else if(a[low]<=a[middle]){
-                 if(check>= a[low] && check<a[middle]){
+                 if(check>= a[low] && check<=a[middle]){
                    high = middle - 1;
                  }
                  else{
@@ -32,7 +32,7 @@ class Rotated{
                  }
              }
              else{
-                 if(check>a[middle] && check<=a[high]){
+                 if(check>=a[middle] && check<=a[high]){
                    low = middle + 1;
                     }
                  else{

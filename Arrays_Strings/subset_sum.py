@@ -62,26 +62,21 @@ class SubsetSum:
 		rows = len(self.nums)
 
 		# Checking if the target sum is achievable
-		for row in range(rows):
-			if self.table[row][target_sum] == True:
-				break
+		check = self.table[rows-1][target_sum]
+		if check:
+			subset = []
+			while target_sum != 0:
+				if row != 0:
+					if not self.table[row-1][target_sum]:
+						subset.append(self.nums[row])
+						target_sum -= self.nums[row]
+				else:
+					 target_sum -= self.nums[row]
+					 subset.append(self.nums[row])
 
-		if row == rows:
-			return None
+				row -= 1
 
-		subset = []
-		while target_sum != 0:
-			if row != 0:
-				if not self.table[row-1][target_sum]:
-					subset.append(self.nums[row])
-					target_sum -= self.nums[row]
-			else:
-				 target_sum -= self.nums[row]
-				 subset.append(self.nums[row])
-
-			row -= 1
-
-		return subset
+			return subset
 
 if __name__ == "__main__":
 	ob = SubsetSum([6, 1, 5, 20, 25, 4, 12])
